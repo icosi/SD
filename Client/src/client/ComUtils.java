@@ -209,19 +209,24 @@ public class ComUtils{
     }
     
      
-    public char readChar() throws IOException {
-        
-        System.out.println("ASDFASDFASDFADFASDFASDF.");
-        String str = read_string();
-        System.out.println(str.length());
-        char ch = str.charAt(0);
-        return ch;
+
+    
+    public void writeChar(String s) throws IOException{
+        byte bStr[] = new byte[2];/*1 char = 16 bits!!!!!!!!!*/
+        String str = s;
+
+        bStr[0] = (byte) str.charAt(0);
+
+        dos.write(bStr, 0, 1);
     }
     
-    public void writeChar(char ch) throws IOException{
-        String str = Character.toString(ch);
-        write_string(str);
-        
+    public String readChar() throws IOException {
+        System.out.println("prova read char");
+        byte bStr[];
+        char cStr[] = new char[1];
+        bStr = read_bytes(1);
+        cStr[0] = (char) bStr[0];
+        return String.valueOf(cStr);
     }
     
     
@@ -268,6 +273,65 @@ public class ComUtils{
         }
         return test;
     }
+    
+    
+    
+    
+    
+    // Escribim una comanda de 3 lletres
+    public void writeCommand3(String str) throws IOException{
+        int numBytes, lenStr; 
+        byte bStr[] = new byte[3];
+
+        lenStr = str.length();
+
+        if (lenStr > 3)
+          numBytes = 3;
+        else
+          numBytes = lenStr;
+
+        for(int i = 0; i < numBytes; i++)
+          bStr[i] = (byte) str.charAt(i);
+
+        for(int i = numBytes; i < 3; i++)
+          bStr[i] = (byte) ' ';
+
+        dos.write(bStr, 0,3);
+    }
+    
+    public String readCommand3() throws IOException{
+        String str;
+        byte bStr[] = new byte[3];
+        char cStr[] = new char[3];
+
+        bStr = read_bytes(3);
+
+        for(int i = 0; i < 3;i++)
+          cStr[i]= (char) bStr[i];
+
+        str = String.valueOf(cStr);
+
+        return str.trim(); 
+    }
+    
+    
+    // Write i Read de la comanda PLY
+    public void writePLY() throws IOException{
+        writeCommand3("PLY");
+    }
+    public String readPLY() throws IOException{
+        return readCommand3();
+    }
+    
+    
+    // Write i Read de la comanda STP
+    public void writeSTP() throws IOException{
+        writeCommand3("STP");
+    }
+    public String readSTP() throws IOException{
+        return readCommand3();
+    }
+    
     
     
     public void writeCommand(String command) throws IOException{

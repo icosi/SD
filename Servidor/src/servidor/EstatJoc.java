@@ -13,7 +13,6 @@ public class EstatJoc {
     private boolean foldClient;
     private boolean foldServidor;
     private char cardClient;
-    private char cC;
     private char cardServidor;
     private ArrayList cards;
 
@@ -35,18 +34,22 @@ public class EstatJoc {
 
     public void setCardsCS(){
         int random = ThreadLocalRandom.current().nextInt(0,3);
-        char cC = (char) this.cards.get(random);
+        this.cardClient = (char) this.cards.get(random);
         this.cards.remove(random);
         // Printem la carta del client
-        System.out.println("Carta: "+cC);
+        System.out.println("Carta: "+cardClient);
         random = ThreadLocalRandom.current().nextInt(0,2);
-        char cS = (char) this.cards.get(random);
+        this.cardServidor = (char) this.cards.get(random);
         this.cards.remove(random);
     }
     
     
     public char getCardClient(){
-        return cC;
+        return cardClient;
+    }
+    
+    public char getCardServidor(){
+        return cardServidor;
     }
 
     public int getMonedesServidor() {

@@ -33,12 +33,17 @@ public class Client {
             
             
             /* Demanem comanda al client*/
+            /*
             System.out.println("Comanda a enviar");
             String c = scan.next();
             comUtils.writeCommand(c);
             
             char carta = comUtils.readChar();
+            */
             
+            comUtils.writePLY();
+            String carta = comUtils.readChar();
+
             System.out.println("Tens la carta: "+carta);
             
             

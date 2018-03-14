@@ -103,20 +103,20 @@ public class Servidor {
                 comUtils = new ComUtils(socket);
 
                 /* Esperem una comanda */
-                str = comUtils.readCommand();
+                str = comUtils.readCommand3();
                 System.out.println("Em llegit la comanda: "+str);
                 
                 // Si la comanda es 'PLY' comencem un joc
                 if (str.equalsIgnoreCase("PLY")){
                     System.out.println("Anem a començar el joc");
-                    prova  = new EstatJoc(10,10);
+                    prova = new EstatJoc(10,10);
                     prova.setCardsCS();
                     
                     //int monedaServidor = prova.getMonedesServidor();
                     char card = prova.getCardClient();
-                    
-                    comUtils.writeChar(card);
-                    System.out.println("Tens la carta"+card);
+                    System.out.println("Tens la carta "+card);
+
+                    comUtils.writeChar(comUtils.char2String(card));
                 }
 
                 
