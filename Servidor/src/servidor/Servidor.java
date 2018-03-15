@@ -106,38 +106,41 @@ public class Servidor {
                 str = comUtils.readCommand3();
                 System.out.println("Em llegit la comanda: "+str);
                 
-                // Si la comanda es 'PLY' comencem un joc
-                if (str.equalsIgnoreCase("PLY")){
-                    System.out.println("Anem a començar el joc");
-                    prova = new EstatJoc(10,10);
-                    prova.setCardsCS();
-                    
-                    //int monedaServidor = prova.getMonedesServidor();
-                    char card = prova.getCardClient();
-                    System.out.println("Tens la carta "+card);
+                
 
-                    comUtils.writeChar(comUtils.char2String(card));
+                switch(str){
+                    case "PLY":
+                        System.out.println("Anem a començar el joc");
+                        prova = new EstatJoc(10,10);
+                        prova.setPlayers();
+                        
+                        char turn = prova.getTurn();
+                        comUtils.writeChar(comUtils.char2String(turn));
+                        if (turn == 'C'){
+                            System.out.println("    El servidor es player 2 i agafa segon la carta");
+                        }
+                        if (turn == 'S'){
+                            System.out.println("    El servidor es player 1 i comença");
+                        }
+                        
+                        prova.setCardsCS(turn);
+
+                        char card = prova.getCardClient();
+                        comUtils.writeChar(comUtils.char2String(card));
+                        
+                        char cardServidor = prova.getCardServidor();
+                        System.out.println("    La carta del servidor es: "+cardServidor);
+                        
+                        break;
+                        
+                    case "STP":
+                        
+                        break;
                 }
 
+              
+
                 
-                
-                /* Ens esperem a rebre un valor del client */
-                //value = comUtils.read_int32();
-                //System.out.println("He rebut el valor " + value + " del client, ara li envio un 22");
-
-                /* Enviem un 12 al client */
-                //comUtils.write_int32(22);
-
-                /* Tornem a llegir un sencer */
-                //value = comUtils.read_int32();
-
-                //System.out.println("He rebut un " + value + " del client, ara li responc amb un missatge d'error");
-
-                /* Enviem el missatge d'error */
-                //comUtils.write_int32(99);
-
-                /* Com es que client no rep tot el missatge? Perque a ComUtils STRSIZE = 40*/
-                //comUtils.write_string("Aixo es un exemple de practiques de SD. Bip bip bip bip bip.");
             } // fi del while infinit
         } // fi del try
         catch (IOException ex) {

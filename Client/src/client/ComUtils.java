@@ -221,7 +221,6 @@ public class ComUtils{
     }
     
     public String readChar() throws IOException {
-        System.out.println("prova read char");
         byte bStr[];
         char cStr[] = new char[1];
         bStr = read_bytes(1);
@@ -260,18 +259,22 @@ public class ComUtils{
     
     
     
-    public void writeSpace() {
-        char space = ' ';
-        
+    public void write_space() throws IOException {
+        byte bStr[] = new byte[1];
+        String str = " ";
+
+        bStr[0] = (byte) str.charAt(0);
+
+        dos.write(bStr, 0, 1);
     }
     
     
-    public char readSpace(char ch){
-        char test = 0;
-        if(isWhiteSpace(ch)){
-            return ch;
-        }
-        return test;
+    public String read_space() throws IOException {
+        byte bStr[];
+        char cStr[] = new char[1];
+        bStr = read_bytes(1);
+        cStr[0] = (char) bStr[0];
+        return String.valueOf(cStr);
     }
     
     
@@ -394,7 +397,6 @@ public class ComUtils{
     }
 
     
-    
     public int string2int(String myString){
         int i = Integer.parseInt(myString);
         return i;
@@ -404,9 +406,19 @@ public class ComUtils{
         String str = Integer.toString(myInt);
         return str;
     }
-       
     
     
+    public String char2String(char myChar){
+        String str = Character.toString(myChar);
+        return str;
+    }
+    
+    /*
+    public char string2char(String myString){
+        char ch = myString.chartAt(0);
+        return ch;
+    }
+    */
     
     
     

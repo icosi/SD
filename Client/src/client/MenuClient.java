@@ -64,7 +64,8 @@ public class MenuClient {
         
         String turn = this.ctr.getClient().getComUtils().readChar();
         System.out.println("    El torn es: "+turn);      
-
+        this.ctr.getClient().setTrun(turn);
+        
         String carta = this.ctr.getClient().getComUtils().readChar();
         System.out.println("    Tens la carta: "+carta); 
         
@@ -93,6 +94,7 @@ public class MenuClient {
                 break;
             
             case "FLD":
+                menuFold(sc);
                 break;
                 
         }
@@ -113,6 +115,7 @@ public class MenuClient {
                 break;
             
             case "FLD":
+                menuFold(sc);
                 break;
                 
         }
@@ -120,6 +123,7 @@ public class MenuClient {
     
     private void menuFold(Scanner sc){
         System.out.println("    Has fet fold. Has perdut.");
+        
     }
     
     private void menuRemach(Scanner sc){

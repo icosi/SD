@@ -255,91 +255,27 @@ public class ComUtils{
     */
     
     
-    
-    public void writeSpace() {
-        char space = ' ';
-        
-    }
-    
-    
-    public char readSpace(char ch){
-        char test = 0;
-        if(isWhiteSpace(ch)){
-            return ch;
-        }
-        return test;
-    }
-    
-    
-    public void writeCommand(String command) throws IOException{
-        
-        //write_string(command);
-        System.out.println("prova swtich case");
+    public void write_space() throws IOException {
+        byte bStr[] = new byte[1];
+        String str = " ";
 
-        /*
-        switch(command) {
-            // Cas en el que enviem la comanda Play 
-            case "PLY":
-                System.out.println("prova swtich case");
-                write_string("PLY");
-                break;
-                
-            
-        }
-    
-        */
-    }
+        bStr[0] = (byte) str.charAt(0);
 
-    
-    public String readCommand() throws IOException{
-        String value = read_string();
-        return value;
+        dos.write(bStr, 0, 1);
     }
     
     
-    public void writeCommandOneParametre(){
-        
-    }
-
-    public void readCommandOneParametre(String command, String parametre){
-        
-    }
-
-    
-    
-    public int string2int(String myString){
-        int i = Integer.parseInt(myString);
-        return i;
-    }
-    
-    public String int2String(int myInt){
-        String str = Integer.toString(myInt);
-        return str;
+    public String read_space() throws IOException {
+        byte bStr[];
+        char cStr[] = new char[1];
+        bStr = read_bytes(1);
+        cStr[0] = (char) bStr[0];
+        return String.valueOf(cStr);
     }
     
     
-    public String char2String(char myChar){
-        String str = Character.toString(myChar);
-        return str;
-    }
-    
-    /*
-    public char string2char(String myString){
-        char ch = 
-    }
-*/
-
-    void writeCommandTwoParametre(String stk, String int2String, String int2String0) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    void writeCommandOneParametre(String trn, String string) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-       
     
     
-     
     // Escribim una comanda de 3 lletres
     public void writeCommand3(String str) throws IOException{
         int numBytes, lenStr; 
@@ -382,7 +318,7 @@ public class ComUtils{
         writeCommand3("PLY");
     }
     public String readPLY() throws IOException{
-        return readCommand();
+        return readCommand3();
     }
     
     
@@ -391,12 +327,90 @@ public class ComUtils{
         writeCommand3("STP");
     }
     public String readSTP() throws IOException{
-        return readCommand();
+        return readCommand3();
+    }
+    
+ 
+    public void writeCommand(String command) throws IOException{
+        switch(command) {
+            /* Cas en el que enviem la comanda Play */
+            case "PLY":
+                //System.out.println("prova a comutils");
+                write_string("PLY");
+                break;
+                
+            // Cas en el que enviem la comanda Stop
+            case "STP":
+                write_string("STP");
+                break;
+                
+            // Cas en el que enviem la comanda Bet
+            case "BET":
+                write_string("BET");
+                break;
+                
+            // Cas en el que enviem la comanda Call
+            case "CAL":
+                write_string("CAL");
+                break;
+                
+            // Cas en el que enviem la comanda Fold
+            case "FLD":
+                write_string("FLD");
+                break;
+                
+            // Cas en el que enviem la comanda Check
+            case "CHK":
+                write_string("CHK");
+                break;
+            
+        }
+    }
+
+    
+    public String readCommand() throws IOException{
+        String value = read_string();
+        return value;
+    }
+    
+  
+
+    
+    
+    public int string2int(String myString){
+        int i = Integer.parseInt(myString);
+        return i;
+    }
+    
+    public String int2String(int myInt){
+        String str = Integer.toString(myInt);
+        return str;
     }
     
     
+    public String char2String(char myChar){
+        String str = Character.toString(myChar);
+        return str;
+    }
     
+    /*
+    public char string2char(String myString){
+        char ch = myString.chartAt(0);
+        return ch;
+    }
+    */
+
+
+    void writeCommandTwoParametre(String stk, String int2String, String int2String0) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    void writeCommandOneParametre(String trn, String string) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+       
     
+   
     
     
     

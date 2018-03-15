@@ -32,15 +32,40 @@ public class EstatJoc {
         };
     }
 
-    public void setCardsCS(){
-        int random = ThreadLocalRandom.current().nextInt(0,3);
-        this.cardClient = (char) this.cards.get(random);
-        this.cards.remove(random);
-        // Printem la carta del client
-        System.out.println("Carta: "+cardClient);
-        random = ThreadLocalRandom.current().nextInt(0,2);
-        this.cardServidor = (char) this.cards.get(random);
-        this.cards.remove(random);
+    
+    public void setPlayers(){
+        int random = ThreadLocalRandom.current().nextInt(0,2);
+
+        // Si random = 1 --> Client es player1
+        // Si ranodm = 2 --> Servidor es player1
+        if (random == 1){
+            this.turn = 'C';
+        }
+        else{
+            this.turn = 'S';
+        }
+    }
+    
+    
+    public void setCardsCS(Character ch){
+        if (ch == 'C'){
+            int random = ThreadLocalRandom.current().nextInt(0,3);
+            this.cardClient = (char) this.cards.get(random);
+            this.cards.remove(random);
+
+            random = ThreadLocalRandom.current().nextInt(0,2);
+            this.cardServidor = (char) this.cards.get(random);
+            this.cards.remove(random);
+        }
+        if (ch == 'S'){
+            int random = ThreadLocalRandom.current().nextInt(0,3);
+            this.cardServidor = (char) this.cards.get(random);
+            this.cards.remove(random);
+
+            random = ThreadLocalRandom.current().nextInt(0,2);
+            this.cardClient = (char) this.cards.get(random);
+            this.cards.remove(random);
+        }
     }
     
     
